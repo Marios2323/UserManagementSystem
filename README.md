@@ -1,0 +1,76 @@
+# User Management System
+
+A simple Java OOP project demonstrating a user management system with authentication, services, repositories, and basic tests.  
+This project is suitable for learning **Java OOP principles**, **custom exceptions**, and **manual testing patterns**.
+
+## Features
+
+- User registration and deletion
+- Role-based authentication (USER / ADMIN)
+- Custom runtime exceptions:
+  - `UserAlreadyExistsException`
+  - `UserNotFoundException`
+  - `InvalidCredentialsException`
+- In-memory repository (`InMemoryUserRepository`)
+- Testable services with `UserService` and `AuthService`
+- Mini custom test framework (`TestAssertions`)
+- Demo application flow (`Main.java`)
+
+## Project Structure
+
+src/
+├─ exceptions/ # Custom runtime exceptions
+├─ model/ # User and Role classes
+├─ repository/ # Repository interface and in-memory implementation
+├─ service/ # Service classes (UserService, AuthService)
+├─ tests/ # Manual tests using TestAssertions
+├─ utils/ # TestAssertions utility class
+└─ Main.java # Demo application
+.gitignore # IDE / build ignores
+
+
+## Getting Started
+
+1. Clone the repository
+
+``git clone https://github.com/Marios2323/UserManagementSystem.git
+cd UserManagementSystem``
+
+2. Compile the project
+
+``javac -d out $(find src -name "*.java")``
+
+3. Run the demo
+
+``java -cp out Main``
+
+4. Run manual tests
+
+``java -cp out tests.UserTests
+java -cp out tests.AuthTests``
+
+Examples
+User Registration & Login
+
+UserService userService = new UserService(new InMemoryUserRepository());
+AuthService authService = new AuthService(userService);
+
+User user = new User("michael", "1234", Role.USER);
+userService.save(user);
+
+boolean login = authService.login("michael", "1234"); // returns true
+boolean isAdmin = authService.isAdmin("michael");     // returns false
+
+## Contributing
+
+This project is intended for learning and demonstration purposes. Contributions are welcome in the form of:
+
+Adding JUnit 5 tests
+
+Refactoring for Maven / Gradle
+
+Extending repository to a database-backed implementation
+
+## License
+
+This project is licensed under the MIT License. See LICENSE for details.
