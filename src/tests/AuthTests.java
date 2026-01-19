@@ -15,21 +15,21 @@ public class AuthTests {
         UserService userService = new UserService(new InMemoryUserRepository());
         AuthService authService = new AuthService(userService);
 
-        userService.save(new User("admin", "admin123", Role.ADMIN));
+        userService.save(new User("Admin", "admin123", Role.ADMIN));
 
         TestAssertions.assertTrue(
-                authService.login("admin", "admin123"),
+                authService.login("Admin", "admin123"),
                 "Login should succeed"
         );
 
         TestAssertions.assertTrue(
-                authService.isAdmin("admin"),
+                authService.isAdmin("Admin"),
                 "User should be admin"
         );
 
         TestAssertions.assertThrows(
                 InvalidCredentialsException.class,
-                () -> authService.login("admin", "wrong"),
+                () -> authService.login("Admin", "wrong"),
                 "Login should fail with wrong password"
         );
 
