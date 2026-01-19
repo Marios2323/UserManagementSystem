@@ -11,24 +11,24 @@ public class UserTests {
     public static void main(String[] args) {
         UserService service = new UserService(new InMemoryUserRepository());
 
-        User user = new User("michael", "1234", Role.USER);
+        User user = new User("Michael", "1234", Role.USER);
         service.save(user);
 
         TestAssertions.assertTrue(
-                service.exists("michael"),
+                service.exists("Michael"),
                 "User should exist after save"
         );
 
         TestAssertions.assertEquals(
                 Role.USER,
-                service.findByUsername("michael").getRole(),
+                service.findByUsername("Michael").getRole(),
                 "Role should be USER"
         );
 
-        service.delete("michael");
+        service.delete("Michael");
 
         TestAssertions.assertTrue(
-                !service.exists("michael"),
+                !service.exists("Michael"),
                 "User should not exist after delete"
         );
 
